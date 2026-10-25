@@ -1,10 +1,10 @@
 title: Documentation Template
 description: Reusable Jekyll documentation website
 url: "https://r14r.github.io"
-baseurl: "/github-pages-for-documentation-template"
+baseurl: "/github-pages-template"
 project:
   name: Documentation Template
-  url: "https://r14r.github.io/github-pages-for-documentation-template/"
+  url: "https://r14r.github.io/github-pages-template/"
 author:
   name: Documentation Template
 theme: minimal-mistakes-jekyll
@@ -36,5 +36,4 @@ exclude:
   - VERSION
   - update-cli.yaml
   - vendor
-  - docs
   - _site

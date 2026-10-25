@@ -28,12 +28,11 @@ test: lint
     bundle exec jekyll build --strict_front_matter --destination _site
 
 build: test
-    bundle exec jekyll build --strict_front_matter --destination docs
-    @touch docs/.nojekyll
-    @test -s docs/index.html
+    @test -s _site/index.html
+    @test -s _site/assets/css/main.css
 
 ci: build
-    @test -s docs/index.html
+    @test -s _site/index.html
 
 precommit: test
 
@@ -44,5 +43,4 @@ serve: run
 
 clean:
     bundle exec jekyll clean
-    @rm -rf docs
 
