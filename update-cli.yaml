@@ -1,7 +1,7 @@
 schemaVersion: 2
 project:
   name: GitHub Pages Documentation Template
-  slug: github-pages-for-documentation-template
+  slug: github-pages-template
   type: generic
 
 workflows:

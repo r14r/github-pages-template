@@ -1,31 +1,39 @@
-# GitHub Pages documentation template
+# GitHub Pages Template
 
-Reusable Jekyll / Minimal Mistakes documentation website with nested navigation and a sticky scroll-aware TOC.
+Reusable Jekyll documentation template based on Minimal Mistakes.
 
-## Quick start
+Features include hierarchical left navigation, an active-page red border, a sticky right-hand table of contents with ScrollSpy, automatic heading highlighting, and a configurable footer.
+
+## Repository and site
+
+- Repository: https://github.com/r14r/github-pages-template
+- Published site: https://r14r.github.io/github-pages-template/
+- Local preview: http://127.0.0.1:4000/github-pages-template/
+
+## Development
+
+Ruby, Bundler, and just are required.
 
 ```sh
-just install
+just bootstrap
 just setup
 just test
 just build
 just run
 ```
 
-Local URL: http://127.0.0.1:4000/github-pages-for-documentation-template/
+`just build` generates `_site/`. This directory is ignored by Git, and GitHub Actions publishes its contents as a Pages artifact. There is no need to commit generated HTML.
 
-Public URL: https://r14r.github.io/github-pages-for-documentation-template/
+## GitHub Pages
 
-## GitHub Pages deployment (required setting)
+Under **Settings → Pages**, choose **Source: GitHub Actions**. The workflow in `.github/workflows/pages.yml` builds the site with Bundler and deploys the generated `_site/` artifact. Do not select branch-based deployment from `docs/`.
 
-In **Settings → Pages → Build and deployment**, select **Source: GitHub Actions** (NOT "Deploy from a branch").
+## Reuse
 
-The checked-in `.github/workflows/pages.yml` builds the site using Bundler (which installs the Minimal Mistakes theme), uploads the generated `_site/` files, and deploys via the official GitHub Pages actions. The legacy GitHub Pages automatic Jekyll build cannot resolve the theme gem and must not be used.
+Update `title`, `url`, `baseurl`, `project.name`, `project.url`, `author.name` in `_config.yml`, and adjust `_data/navigation.yml` and Markdown pages. A project repository at `https://github.com/OWNER/PROJECT` typically uses `baseurl: "/PROJECT"`.
 
-The local `just build` command still writes `docs/` for optional static export, but that folder is **not the deployment source** when using the recommended GitHub Actions configuration. Do not commit `docs/` merely to deploy Pages.
+## Update CLI
 
-## Adapt to another repository
+The root `update-cli.yaml` contains schemaVersion 2 task workflows. Validate against the installed Update CLI using `update-cli doctor` and `update-cli setup --list`.
 
-Update `url`, `baseurl`, `project.name` and `project.url` in `_config.yml` to match the destination GitHub Pages URL. Do not include the `docs/` directory name in `baseurl`.
-
-See `just --list` for local commands. `update-cli doctor` validates the Update CLI manifest with your installed version.
+The single version source is `VERSION`. The Gemfile.lock remains tracked to keep Bundler dependency resolution reproducible.
