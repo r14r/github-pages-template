@@ -19,7 +19,7 @@ setup:
 
 fmt-check:
     @ruby -e 'require "yaml"; %w[docs/_config.yml docs/_data/navigation.yml update-cli.yaml].each { |f| YAML.parse_file(f) }'
-    @ruby -e 'abort "Invalid SemVer" unless File.read("VERSION").strip.match?(/\\A\\d+\\.\\d+\\.\\d+\\z/)'
+    @ruby -e 'abort "Invalid SemVer" unless File.read("VERSION").strip.match?(/\A\d+\.\d+\.\d+\z/)'
 
 lint: bootstrap fmt-check
     cd docs && bundle exec jekyll doctor
