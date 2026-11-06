@@ -1,7 +1,12 @@
+# Jekyll build artifacts (source docs/ is tracked)
 _site/
+docs/_site/
 .jekyll-cache/
+docs/.jekyll-cache/
 .sass-cache/
+docs/.sass-cache/
 .bundle/
+docs/.bundle/
 vendor/
-docs/
+docs/vendor/
 .release-*

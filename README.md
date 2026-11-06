@@ -1,18 +1,44 @@
 # GitHub Pages Template
 
-Reusable Jekyll documentation template based on Minimal Mistakes.
+Reusable Jekyll documentation website built with Minimal Mistakes. This repository is designed to be used as a **GitHub repository template**, with all documentation-site sources isolated in `docs/` and the repository root available for the actual application.
 
-Features include hierarchical left navigation, an active-page red border, a sticky right-hand table of contents with ScrollSpy, automatic heading highlighting, and a configurable footer.
+## Structure
 
-## Repository and site
+```text
+.
+├── .github/workflows/pages.yml  # build/deploy docs site
+├── docs/
+│   ├── _config.yml
+│   ├── _data/navigation.yml
+│   ├── _includes/
+│   ├── assets/
+│   ├── Gemfile
+│   ├── Gemfile.lock
+│   ├── index.md
+│   ├── installation.md
+│   └── configuration.md
+├── .gitignore
+├── README.md
+├── VERSION
+├── update-cli.yaml
+└── justfile
+```
 
-- Repository: https://github.com/r14r/github-pages-template
-- Published site: https://r14r.github.io/github-pages-template/
-- Local preview: http://127.0.0.1:4000/github-pages-template/
+Keep your project's application files and directories at the root (e.g. `src/`, `tests/`, `package.json`). The documentation site lives exclusively under `docs/`.
 
-## Development
+## Create a repository from this template
 
-Ruby, Bundler, and just are required.
+1. Enable **Template repository** in this repository's GitHub **Settings → General**, if it is not already enabled.
+2. Click **Use this template → Create a new repository**.
+3. Update `docs/_config.yml` with the new site's `title`, `url`, `baseurl`, `project` and `author` values.
+4. Edit `docs/_data/navigation.yml` and the Markdown pages in `docs/`.
+5. In the new repository's **Settings → Pages**, set **Source: GitHub Actions**.
+
+For a project named `OWNER/PROJECT`, normally use `url: "https://OWNER.github.io"` and `baseurl: "/PROJECT"`. The `docs/` path does **not** appear in `baseurl`.
+
+## Local documentation development
+
+Requires Ruby, Bundler and just.
 
 ```sh
 just bootstrap
@@ -22,18 +48,12 @@ just build
 just run
 ```
 
-`just build` generates `_site/`. This directory is ignored by Git, and GitHub Actions publishes its contents as a Pages artifact. There is no need to commit generated HTML.
+Alternatively: `cd docs && bundle exec jekyll serve`.
 
-## GitHub Pages
+The generated site is under `docs/_site/` (ignored by Git). GitHub Actions uses `docs/Gemfile.lock` and publishes the build artifact from `docs/_site/`, not via GitHub's legacy branch-based Jekyll builder.
 
-Under **Settings → Pages**, choose **Source: GitHub Actions**. The workflow in `.github/workflows/pages.yml` builds the site with Bundler and deploys the generated `_site/` artifact. Do not select branch-based deployment from `docs/`.
+Published template demo: https://r14r.github.io/github-pages-template/
 
-## Reuse
+## Root tooling
 
-Update `title`, `url`, `baseurl`, `project.name`, `project.url`, `author.name` in `_config.yml`, and adjust `_data/navigation.yml` and Markdown pages. A project repository at `https://github.com/OWNER/PROJECT` typically uses `baseurl: "/PROJECT"`.
-
-## Update CLI
-
-The root `update-cli.yaml` contains schemaVersion 2 task workflows. Validate against the installed Update CLI using `update-cli doctor` and `update-cli setup --list`.
-
-The single version source is `VERSION`. The Gemfile.lock remains tracked to keep Bundler dependency resolution reproducible.
+`justfile` is a root-level entry point for documentation commands. `update-cli.yaml` provides Update CLI tasks and `VERSION` is the current template version. Replace or extend these files when customizing the generated project.
